@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+
+// I used the following website to help understand IO manipulation in C#endregion
+//https://www.tutorialspoint.com/csharp/csharp_file_io.htm#:~:text=The%20FileStream%20class%20in%20the,from%20the%20abstract%20class%20Stream.&text=FileStream%20F%20%3D%20new%20FileStream(%22,txt%22%2C%20FileMode.
+
 class Program  //this is my main class
 {
     static List<string> entries = new List<string>(); //initalising the primary list

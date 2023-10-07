@@ -51,7 +51,6 @@ class Program
                 }
             else if (choice == 5)
                 {
-                    // SaveJournal(); 
                     Environment.Exit(0);
                 }
             else

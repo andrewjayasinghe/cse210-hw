@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-class Program
+class Program  //this is my main class
 {
-    static List<string> entries = new List<string>();
-    static List<string> prompts = new List<string>
+    static List<string> entries = new List<string>(); //initalising the primary list
+    static List<string> prompts = new List<string> // this is my prompts list
     {
         "Who was the most interesting person I interacted with today?",
         "What was the best part of my day?",
@@ -64,7 +64,7 @@ class Program
         }
     }
 
-        static void WriteNewEntry()
+        static void WriteNewEntry() // this function prompts the user to answer a prompt and saves it in the entries array
     {
         Console.Clear();
         Console.WriteLine("Write a new entry:");
@@ -88,7 +88,7 @@ class Program
 
 
 
-        static void DisplayJournal()
+        static void DisplayJournal() // this function reads all the entries in the entries array
     {
         Console.Clear();
         Console.WriteLine("Journal Entries:");
@@ -98,7 +98,7 @@ class Program
         }
     }
 
-        static void SaveJournalToFile()
+        static void SaveJournalToFile() // This function writes all the entries in the entries array into a file which can be loaded later
     {
         Console.Clear();
         Console.Write("Enter a filename to save the journal: ");
@@ -121,7 +121,7 @@ class Program
         }
     }
 
-    static void LoadJournalFromFile()
+    static void LoadJournalFromFile() // This function loads entries saved to files into the entries array
     {
         Console.Clear();
         Console.Write("Enter a filename to load the journal: ");

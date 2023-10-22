@@ -2,6 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
+// This program has 5 Classes
+// They are as follows:
+// 1. ScriptureMem
+// 2. SciptureCollection
+// 3. Scripture
+// 4. Reference
+// 5. Word
 public class ScriptureMem
 {
     private readonly Scripture _scripture;
@@ -15,7 +22,7 @@ public class ScriptureMem
     {
         int count = 0;
 
-    
+        // This is what I use to display the initial scripture and quit if selected
         while(count <= 0){
         Console.Clear();
         _scripture.Display();
@@ -27,7 +34,7 @@ public class ScriptureMem
         
         }
     
-
+        // This is what I use to run the loop that covers words when enter is pressed and quit
         while (!_scripture.IsComplete())
         {
             Console.Clear();
@@ -45,21 +52,29 @@ public class ScriptureMem
 
     public static void Main()
     {
-        // Adding multiple scriptures that are selected at random to show the user to memmorize
-        // This is that code for it
-        List<string> scriptureList = new List<string>();  
-        scriptureList.Add("For God so loved the world that he gave his one and only Son, that whosoever believeth in him should not perish, but have everlasting life.");
-        scriptureList.Add("Let not mercy and truth forsake thee: bind them about thy neck; write them upon the table of thine heart; So shalt thou find favour and good understanding in the sight of God and man. Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.");
-        scriptureList.Add("And it came to pass that I, Nephi, said unto my father: I will go and do the things which the Lord hath commanded, for I know that the Lord giveth no commandments unto the children of men, save he shall prepare a way for them that they may accomplish the thing which he commandeth them.");
+                
+       
+        var collection = new ScriptureCollection();
+
+        //Add Titles
+        collection.AddTitle("John 3:16");
+        collection.AddTitle("Proverbs 3:5-6");
+        collection.AddTitle("1 Nephi 3:10");
         
-        List<string> scriptureTitleList = new List<string>();  
-        scriptureTitleList.Add("John 3:16");
-        scriptureTitleList.Add("Proverbs 3:5-6");
-        scriptureTitleList.Add("1 Nephi 3:10");
+        // Add scriptures
+        collection.AddScripture("For God so loved the world that he gave his one and only Son, that whosoever believeth in him should not perish, but have everlasting life.");
+        collection.AddScripture("Let not mercy and truth forsake thee: bind them about thy neck; write them upon the table of thine heart; So shalt thou find favour and good understanding in the sight of God and man. Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.");
+        collection.AddScripture("And it came to pass that I, Nephi, said unto my father: I will go and do the things which the Lord hath commanded, for I know that the Lord giveth no commandments unto the children of men, save he shall prepare a way for them that they may accomplish the thing which he commandeth them.");
+
+        //initiating my 2 lists one for holding the tiles, other for holding the verses
+        List<string> allTitles = collection.GetAllTitles();
+        List<string> allScriptures = collection.GetAllScriptures();
+        
+        // creating a randdom number between 0 to the count of the length of the list -1 since the index of the last one is 2
         var random = new Random();
-        int randomIndex = random.Next(0, scriptureList.Count);
-        var scriptureToUse = scriptureList[randomIndex];
-        var scriptureTitleToUse = scriptureTitleList[randomIndex];
+        int randomIndex = random.Next(0, (allTitles.Count-1));
+        var scriptureToUse = allScriptures[randomIndex];
+        var scriptureTitleToUse = allTitles[randomIndex];
 
         var reference = new Reference(scriptureTitleToUse);
         var scripture = new Scripture(reference, scriptureToUse);
@@ -68,6 +83,39 @@ public class ScriptureMem
         ScriptureMem.Run();
     }
 }
+
+// This is my class which creates and holds my lists
+public class ScriptureCollection
+{
+    private List<string> scriptureList = new List<string>();
+    private List<string> titleList = new List<string>();
+
+    public void AddScripture(string scripture)
+    {
+        scriptureList.Add(scripture);
+    }
+
+    public void AddTitle(string title)
+    {
+        titleList.Add(title);
+    }
+
+    public void RemoveScripture(string scripture)
+    {
+        scriptureList.Remove(scripture);
+    }
+
+    public List<string> GetAllScriptures()
+    {
+        return scriptureList;
+    }
+    public List<string> GetAllTitles()
+    {
+        return titleList;
+    }
+}
+
+
 
 public class Scripture
 {
@@ -81,7 +129,8 @@ public class Scripture
         Reference = reference;
         _words = text.Split(' ').Select(word => new Word(word)).ToList();
     }
-
+    
+    //This is the method that hides a random word in the given scripture phrase
     public void HideRandomWord()
     {
         var random = new Random();
@@ -97,6 +146,7 @@ public class Scripture
         _hiddenWordCount++;
     }
 
+    //This method is what i use to change the bool value which closes the program if all the words in the scripture are hidden
     public bool IsComplete()
     {
         return _hiddenWordCount >= _words.Count;
@@ -143,7 +193,7 @@ public class Word
     {
         IsHidden = true;
     }
-
+    // This method hides my scripture words or does display the text if isHidden is false
     public override string ToString()
     {
         return IsHidden ? "_____" : Text;

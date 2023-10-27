@@ -1,9 +1,16 @@
 using System;
 
-class Program
+namespace library_demo
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Hello Learning05 World!");
+        static void main(string[] args)
+        {
+            Book book1 = new Book();
+            book1.SetAuthor("Smith");
+            book1.SetTitle("A Great Book");
+
+            Console.WriteLine(book1.GetBookInfo());
+        }
     }
 }

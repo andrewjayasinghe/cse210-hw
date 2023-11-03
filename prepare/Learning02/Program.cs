@@ -1,27 +1,74 @@
 using System;
+using System.Diagnostics;
 
-class Program
+class Demo
 {
-    static void Main(string[] args)
-    {
-        Job job1 = new Job();
-        job1._jobTitle = "Software Engineer";
-        job1._company = "Microsoft";
-        job1._startYear = 2019;
-        job1._endYear = 2022;
+	private Stopwatch sw = new Stopwatch();
+	private double lastFrame;
 
-        Job job2 = new Job();
-        job2._jobTitle = "Manager";
-        job2._company = "Apple";
-        job2._startYear = 2022;
-        job2._endYear = 2023;
+	private double deltaTime()
+	{
+		 TimeSpan ts = this.sw.Elapsed;
+		 double firstFrame = ts.TotalMilliseconds;
+            
+		 double dt = firstFrame - lastFrame;
+           
+		 this.lastFrame = ts.TotalMilliseconds;
 
-        Resume myResume = new Resume();
-        myResume._name = "Allison Rose";
+		 return dt;
+	}
 
-        myResume._jobs.Add(job1);
-        myResume._jobs.Add(job2);
+	public void run()
+  {
+		this.sw.Start();
+		
+        double acc = 0.0;
+		List<string> statementList = new List<string>();
 
-        myResume.Display();
-    }
+		Console.WriteLine("Go!");
+		Console.Write(">");
+
+		while (acc <= 10000)
+		{
+			acc += this.deltaTime();
+			if (!Console.KeyAvailable)
+			{
+				continue;
+			}
+			ConsoleKeyInfo key = Console.ReadKey();
+			if (key.Key == ConsoleKey.Enter)
+			{
+				Console.WriteLine("");
+				statementList.Add("\n");
+				Console.Write(">");
+
+			}
+			else
+			{
+				statementList.Add(key.KeyChar.ToString());
+			}
+		}
+	
+		Console.WriteLine("\nTime's up!");
+		Console.WriteLine("");
+
+		statementList.Add("\n");
+
+		int lineCount = statementList.Count(line => line == "\n");
+
+		string statementListStr = String.Join<string>("", statementList);
+		Console.WriteLine($"Here's what you typed: {statementListStr}");
+		Console.WriteLine($"You listed {lineCount} lines\n");
+
+
+  }
+}
+
+static class Program
+{
+	static void Main(string[] args)
+  {
+    Demo demo = new Demo();
+		demo.run();
+  }
 }

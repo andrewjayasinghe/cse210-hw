@@ -1,9 +1,9 @@
-public class Eternal : Goal {
+public class EternalGoal : Goal {
 
-    public Eternal() : base() {
+    public EternalGoal() : base() {
         
     }
-    public Eternal(string name, string description, double points, int timesFinished):
+    public EternalGoal(string name, string description, double points, int timesFinished):
     base(name, description, points, timesFinished) {
         
     }

@@ -1,8 +1,8 @@
-public class Simple : Goal {
-    public Simple() : base() {
+public class SimpleGoal : Goal {
+    public SimpleGoal() : base() {
         
     }
-    public Simple(string name, string description, double points, int timesFinished):
+    public SimpleGoal(string name, string description, double points, int timesFinished):
     base(name, description, points, timesFinished){
 
     }

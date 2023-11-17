@@ -92,13 +92,13 @@ class Program
                     input = int.Parse(Console.ReadLine());
                     switch(input){
                         case 1:
-                            Goals.Add(new Simple());
+                            Goals.Add(new SimpleGoal());
                             break;
                         case 2:
-                            Goals.Add(new Eternal());
+                            Goals.Add(new EternalGoal());
                             break;
                         case 3:
-                            Goals.Add(new Checklist());
+                            Goals.Add(new ChecklistGoal());
                             break;
                     }
                     break;
@@ -127,13 +127,13 @@ class Program
                         string[] values = lines[i].Split(":");
                         switch(values[0]){
                             case "simple":
-                                Goals.Add(new Simple(values[1], values[2], double.Parse(values[3]), int.Parse(values[4])));
+                                Goals.Add(new SimpleGoal(values[1], values[2], double.Parse(values[3]), int.Parse(values[4])));
                                 break;
                             case "eternal":
-                                Goals.Add(new Eternal(values[1], values[2], double.Parse(values[3]), int.Parse(values[4])));
+                                Goals.Add(new EternalGoal(values[1], values[2], double.Parse(values[3]), int.Parse(values[4])));
                                 break;
                             case "checklist":
-                                Goals.Add(new Checklist(values[1], values[2], double.Parse(values[3]), int.Parse(values[4]), int.Parse(values[5]), int.Parse(values[6])));
+                                Goals.Add(new ChecklistGoal(values[1], values[2], double.Parse(values[3]), int.Parse(values[4]), int.Parse(values[5]), int.Parse(values[6])));
                                 break;
                         }
                     }

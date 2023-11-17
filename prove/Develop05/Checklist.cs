@@ -1,13 +1,13 @@
-public class Checklist : Goal {
+public class ChecklistGoal : Goal {
     private int _reachBonus;
     private int _bonusPoints;
     
-    public Checklist() : base() {
+    public ChecklistGoal() : base() {
 
         this._reachBonus = SetReachBonus();
         this._bonusPoints = SetBonusPoints();
     }
-    public Checklist(string name, string description, double points, int timesFinished, int reach, int bonus):
+    public ChecklistGoal(string name, string description, double points, int timesFinished, int reach, int bonus):
     base(name, description, points, timesFinished) {
 
         this._reachBonus = reach;
